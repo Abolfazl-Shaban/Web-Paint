@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint - Tool</title>
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Noto+Sans+Arabic:wght@100..900&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+    .eraserMouse{
+        position: absolute;
+        display: none;
+        pointer-events: none;
+        outline: 1px solid black;
+        outline-offset: 1px;
+    }
+    canvas{
+        background: url("src/images/bg.jpg") no-repeat;
+        background-size: cover;
+        overflow: hidden;
+    }
+
+</style>
+</head>
+<body class=" bg-sky-300 min-h-screen flex justify-center items-center">
+
+    <div id="dialogStart" class=" transition-all fixed inset-0 z-10 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="w-[600px] h-80 bg-white rounded-lg overflow-hidden p-2">
+            <h1 class="bg-orange-500 text-white text-xl p-2 font-medium w-full ">Welcome to Web Paint!</h1>
+
+             <div class="m-2 p-3 px-4 border-2 rounded-lg  ">
+                <div class="flex justify-between items-center p-2 [&_input]:p-0.5 [&_input]:px-2 [&_input]:w-32 [&_input]:border-2  [&_input]:outline-none">
+                    <div>
+                    <label for="pname">Project Name: </label>
+                    <input id="pname" type="text" value="New Project">
+                </div>
+                
+                <div>
+                    <label for="ground">Background: </label>
+                    <select name="ground" id="groundColor" class="p-0.5 px-3 w-36 border-2 outline-non">
+                        <option value="white" selected>White</option>
+                        <option value="black" >Black</option>
+                    </select>
+                </div>
+                </div>
+
+                <div class="flex justify-between items-center p-5 px-8 [&_input]:p-0.5 [&_input]:px-3 [&_input]:w-24 [&_input]:border-2  [&_input]:outline-none">
+                   <div class="">
+                    <label for="width">Width: </label>
+                    <input id="sWidth" type="number" value="800" min="100" max="1400">
+                    <span>px</span>
+                   </div>
+                   <div>
+                    <label for="height">Height: </label>
+                    <input id="sHeight" type="number" value="400" min="100" max="700">
+                    <span>px</span>
+                  </div>
+                </div>    
+             </div>
+             <button id="startBtn" class=" mx-auto block px-52 bg-sky-500 hover:bg-sky-600 mt-10 rounded-lg p-2 w-max text-white">Start Painting</button>
+        </div>
+    </div>
+
+    <div id="container" class=" bg-white shadow-md rounded-2xl ">
+
+        <div id="tool-area" class="flex justify-between items-center w-full h-[50px] p-2 px-4 border-b-2 [&_i]:cursor-pointer [&_label]:cursor-pointer ">
+            <div id="tools" class="flex justify-between items-center w-[70%]">
+                
+                <div id="sEraser" class=" open:text-sky-500 open:border-b-2 border-sky-500 p-1"  >
+                    <i class="fas fa-eraser m-1"></i>
+                    <label>Eraser</label>
+                </div>
+
+                <div id="sBrush"" class="open:text-sky-500 open:border-b-2 border-sky-500 p-1">
+                    <i class="fas fa-paint-brush m-1"></i>
+                    <label>Brush</label>
+                </div>
+
+                <div id="sColor" class=" flex items-center ">
+                    <i class="fas fa-palette m-1"></i>
+                    <label for="color" class="">Choose Color</label>
+                    <input type="color" id="color" class="cursor-pointer m-1 border-none outline-none bg-transparent w-6 h-6">
+                </div>
+
+                <input type="range" id="fontRange" min="1" value="5" max="20" >
+                <span id="fontText" class="border-b-[5px] border-[gray] p-0.5">5px</span>
+             </div>
+             
+              <div id="buttons" class="p-2">
+                <button id="saveBtn" class="bg-sky-500 hover:bg-opacity-80 p-1 px-2 rounded-lg text-white ">Save</button>
+                <button id="clearBtn" class="bg-gray-300 hover:bg-opacity-80 p-1 px-2 rounded-lg ">Clear</button>
+             </div>
+
+          </div>
+        
+
+
+        <div id="draw-area"  class="relative ">
+            <div id="eraserMouse" class="eraserMouse"></div>
+            <canvas class=" rounded-lg w-[800px] h-[400px]"></canvas>
+        </div>
+
+    </div>
+
+    <script src="./src/script.js"></script>
+</body>
+</html>
